@@ -20,7 +20,6 @@ jobs:
   update-pr:
     name: Update the fork PR with upstream changes
     if: >
-      startsWith(github.repository, 'asyncapi/') &&
       github.event.issue.pull_request && 
       github.event.issue.state != 'closed' && (
         contains(github.event.comment.body, '/update') ||
