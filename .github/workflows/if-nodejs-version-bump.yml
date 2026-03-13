@@ -8,6 +8,13 @@ on:
   release:
     types: 
       - published
+  workflow_dispatch:
+    inputs:
+      permission_probe:
+        description: 'Test GITHUB_TOKEN branch and PR creation without Node/npm setup'
+        required: false
+        type: boolean
+        default: true
 
 permissions:
   contents: write
@@ -24,32 +31,37 @@ jobs:
           # target branch of release. More info https://docs.github.com/en/rest/reference/repos#releases
           # in case release is created from release branch then we need to checkout from given branch
           # if @semantic-release/github is used to publish, the minimum version is 7.2.0 for proper working
-          ref: ${{ github.event.release.target_commitish }}
+          ref: ${{ github.event_name == 'release' && github.event.release.target_commitish || github.ref_name }}
           persist-credentials: false
       - name: Check if Node.js project and has package.json
         id: packagejson
         run: test -e ./package.json && echo "exists=true" >> $GITHUB_OUTPUT || echo "exists=false" >> $GITHUB_OUTPUT
-      - if: steps.packagejson.outputs.exists == 'true'
+      - if: github.event_name == 'workflow_dispatch' && inputs.permission_probe == true
+        name: Create permission probe change
+        run: |
+          mkdir -p .github/.permission-probe
+          printf 'run_id=%s\nrun_attempt=%s\n' "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" > .github/.permission-probe/if-nodejs-version-bump.txt
+      - if: steps.packagejson.outputs.exists == 'true' && github.event_name != 'workflow_dispatch'
         name: Determine what node version to use
         # This workflow is from our own org repo and safe to reference by 'master'.
         uses: asyncapi/.github/.github/actions/get-node-version-from-package-lock@master # //NOSONAR
         with:
           node-version: ${{ vars.NODE_VERSION }}
         id: lockversion
-      - if: steps.packagejson.outputs.exists == 'true'
+      - if: steps.packagejson.outputs.exists == 'true' && github.event_name != 'workflow_dispatch'
         name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "${{ steps.lockversion.outputs.version }}"
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
-      - if: steps.packagejson.outputs.exists == 'true'
+      - if: steps.packagejson.outputs.exists == 'true' && github.event_name != 'workflow_dispatch'
         name: Install dependencies
         run: npm ci
-      - if: steps.packagejson.outputs.exists == 'true'
+      - if: steps.packagejson.outputs.exists == 'true' && github.event_name != 'workflow_dispatch'
         name: Assets generation
         run: npm run generate:assets --if-present
-      - if: steps.packagejson.outputs.exists == 'true'  
+      - if: steps.packagejson.outputs.exists == 'true' && github.event_name != 'workflow_dispatch'
         name: Bump version in package.json
         # There is no need to substract "v" from the tag as version script handles it
         # When adding "bump:version" script in package.json, make sure no tags are added by default (--no-git-tag-version) as they are already added by release workflow
@@ -57,12 +69,12 @@ jobs:
         env:
           VERSION: ${{github.event.release.tag_name}}
         run: npm run bump:version
-      - if: steps.packagejson.outputs.exists == 'true'
+      - if: (steps.packagejson.outputs.exists == 'true' && github.event_name != 'workflow_dispatch') || (github.event_name == 'workflow_dispatch' && inputs.permission_probe == true)
         name: Create Pull Request with updated asset files including package.json
         uses: peter-evans/create-pull-request@38e0b6e68b4c852a5500a94740f0e535e0d7ba54 # use 4.2.4 https://github.com/peter-evans/create-pull-request/releases/tag/v4.2.4
         env:
-          RELEASE_TAG: ${{github.event.release.tag_name}}
-          RELEASE_URL: ${{github.event.release.html_url}}
+          RELEASE_TAG: ${{ github.event_name == 'release' && github.event.release.tag_name || format('manual-permission-probe-{0}', github.run_id) }}
+          RELEASE_URL: ${{ github.event_name == 'release' && github.event.release.html_url || format('{0}/{1}/actions/runs/{2}', github.server_url, github.repository, github.run_id) }}
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: 'chore(release): ${{ env.RELEASE_TAG }}'
