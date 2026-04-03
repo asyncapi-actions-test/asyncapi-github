@@ -1,16 +1,15 @@
 ## Github Workflow Security Tightening Progress
-
 ### Github workflows
 
-- [ ] [zizmor.yml](zizmor.yml)
+- [x] [zizmor.yml](zizmor.yml)
 - [x] [add-good-first-issue-labels.yml](.github/workflows/add-good-first-issue-labels.yml) [Test Workflow Run](https://github.com/asyncapi-actions-test/asyncapi-github/actions/runs/23940582027) and [Test Issue Comment](https://github.com/asyncapi-actions-test/asyncapi-github/issues/11#issuecomment-4182608726)
-- [ ] [automerge-for-humans-add-ready-to-merge-or-do-not-merge-label.yml](.github/workflows/automerge-for-humans-add-ready-to-merge-or-do-not-merge-label.yml)
+- [x] [automerge-for-humans-add-ready-to-merge-or-do-not-merge-label.yml](.github/workflows/automerge-for-humans-add-ready-to-merge-or-do-not-merge-label.yml)
 - [ ] [automerge-for-humans-merging.yml](.github/workflows/automerge-for-humans-merging.yml)
-- [ ] [automerge-for-humans-remove-ready-to-merge-label-on-edit.yml](.github/workflows/automerge-for-humans-remove-ready-to-merge-label-on-edit.yml)
-- [ ] [automerge-orphans.yml](.github/workflows/automerge-orphans.yml)
+- [x] [automerge-for-humans-remove-ready-to-merge-label-on-edit.yml](.github/workflows/automerge-for-humans-remove-ready-to-merge-label-on-edit.yml) - Changed to pull_request instead of pull_request_target as secrets access not needed.
+- [x] [automerge-orphans.yml](.github/workflows/automerge-orphans.yml) - GITHUB_TOKEN enough as just querying for PRs and informing in slack.
 - [ ] [automerge.yml](.github/workflows/automerge.yml)
 - [ ] [autoupdate.yml](.github/workflows/autoupdate.yml)
-- [ ] [bounty-program-commands.yml](.github/workflows/bounty-program-commands.yml)
+- [x] [bounty-program-commands.yml](.github/workflows/bounty-program-commands.yml) - Fix allowlist as earlier it was just collapsing to `aeworxet` instead of checking for either.
 - [x] [bump.yml](.github/workflows/bump.yml)
 - [x] [global-remover.yml](.github/workflows/global-remover.yml) - Removed this file as not needed.
 - [x] [global-replicator.yml](.github/workflows/global-replicator.yml)
