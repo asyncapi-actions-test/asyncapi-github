@@ -19,7 +19,7 @@ jobs:
     name: Add ready-to-merge label
     permissions:
       issues: write # required to add labels and post comments on PR issues
-      pull-requests: read # required to read PR metadata from the issue pull_request URL
+      pull-requests: write # required to read PR metadata from the issue pull_request URL
       contents: read # required to compare PR branch commits against base
     if: >
       github.event.issue.pull_request && 
@@ -79,6 +79,7 @@ jobs:
     name: Add do-not-merge label
     permissions:
       issues: write # required to add labels on PR issues
+      pull-requests: write # required to read PR metadata from the issue pull_request URL
     if: >
       github.event.issue.pull_request &&
       github.event.issue.state != 'closed' &&
@@ -104,6 +105,7 @@ jobs:
     name: Add autoupdate label
     permissions:
       issues: write # required to add labels on PR issues
+      pull-requests: write # required to read PR metadata from the issue pull_request URL
     if: >
       github.event.issue.pull_request && 
       github.event.issue.state != 'closed' && 
