@@ -5,9 +5,8 @@
 The flow would be -> 
 1. yamlint to validate the syntax of the yaml files.
 2. Check against schema using ajv to make sure the workflow files are following the correct structure and not missing any required fields.
-3. Use action-lint to check for any potential security issues or best practices in the workflow files.
+3. Use action-lint to check for any potential security issues or best practices in the workflow files. It also checks the params for popular actions.
 4. Use zizmor to check for any potential security issues in the workflow files.
-5. How to check parameters passed to the actions?
 
 ### Github workflows
 
