@@ -79,12 +79,12 @@ jobs:
         env:
           PREV_VERSION: ${{steps.versions.outputs.previousver}}
           LAST_VERSION: ${{steps.versions.outputs.lastver}}
-        run: echo "type=$(npx -q -p semver-diff-cli semver-diff "$PREV_VERSION" "$LAST_VERSION")" >> $GITHUB_OUTPUT
+        run: echo "type=$(npx -q -p semver-diff-cli semver-diff "$PREV_VERSION" "$LAST_VERSION")" >> "$GITHUB_OUTPUT"
       - name: Get name of the person that is behind the newly released version
         id: author
         run: |
           AUTHOR_NAME=$(git log -1 --pretty=format:'%an')
-          printf 'name=%s\n' "$AUTHOR_NAME" >> $GITHUB_OUTPUT
+          printf 'name=%s\n' "$AUTHOR_NAME" >> "$GITHUB_OUTPUT"
       - name: Publish information about the release to Twitter # tweet only if detected version change is not a patch
         # tweet goes out even if the type is not major or minor but "You need provide version number to compare."
         # it is ok, it just means we did not identify previous version as we are tweeting out information about the release for the first time
