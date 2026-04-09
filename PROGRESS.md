@@ -3,13 +3,10 @@
 
 - [x] [zizmor.yml](zizmor.yml)
 - [x] [add-good-first-issue-labels.yml](.github/workflows/add-good-first-issue-labels.yml) [Test Workflow Run](https://github.com/asyncapi-actions-test/asyncapi-github/actions/runs/23940582027) and [Test Issue Comment](https://github.com/asyncapi-actions-test/asyncapi-github/issues/11#issuecomment-4182608726)
-- [x] [automerge-for-humans-add-ready-to-merge-or-do-not-merge-label.yml](.github/workflows/automerge-for-humans-add-ready-to-merge-or-do-not-merge-label.yml)
-- [ ] [automerge-for-humans-merging.yml](.github/workflows/automerge-for-humans-merging.yml)
-- [x] [automerge-for-humans-remove-ready-to-merge-label-on-edit.yml](.github/workflows/automerge-for-humans-remove-ready-to-merge-label-on-edit.yml) - Changed to pull_request instead of pull_request_target as secrets access not needed.
+- [x] [automerge-for-humans-add-ready-to-merge-or-do-not-merge-label.yml](.github/workflows/automerge-for-humans-add-ready-to-merge-or-do-not-merge-label.yml) - Uses GITHUB_TOKEN instead of GH_TOKEN and added pull-requests write permissions to be able write to PR issues and read PR metadata from the issue pull_request URL. [Test PR](https://github.com/asyncapi-actions-test/asyncapi-github/pull/13) and [Test Workflow Run](https://github.com/asyncapi-actions-test/asyncapi-github/actions/runs/24119992834).
+- [x] [automerge-for-humans-remove-ready-to-merge-label-on-edit.yml](.github/workflows/automerge-for-humans-remove-ready-to-merge-label-on-edit.yml) - Changed to pull_request instead of pull_request_target as secrets access not needed. [Test workflow run](https://github.com/asyncapi-actions-test/asyncapi-github/actions/runs/24142906673/job/70448978104).
 - [x] [automerge-orphans.yml](.github/workflows/automerge-orphans.yml) - GITHUB_TOKEN enough as just querying for PRs and informing in slack.
-- [ ] [automerge.yml](.github/workflows/automerge.yml)
-- [ ] [autoupdate.yml](.github/workflows/autoupdate.yml)
-- [x] [bounty-program-commands.yml](.github/workflows/bounty-program-commands.yml) - Fix allowlist as earlier it was just collapsing to `aeworxet` instead of checking for either.
+- [x] [bounty-program-commands.yml](.github/workflows/bounty-program-commands.yml) - Fix allowlist as earlier it was just collapsing to `aeworxet` instead of checking for either. [Test PR](https://github.com/asyncapi-actions-test/asyncapi-github/pull/13) and [Test Workflow Run](https://github.com/asyncapi-actions-test/asyncapi-github/actions/runs/24142666824/job/70448108541).
 - [x] [bump.yml](.github/workflows/bump.yml)
 - [x] [global-remover.yml](.github/workflows/global-remover.yml) - Removed this file as not needed.
 - [x] [global-replicator.yml](.github/workflows/global-replicator.yml)
@@ -28,13 +25,16 @@
 - [x] [transfer-issue.yml](.github/workflows/transfer-issue.yml) Removed that as it was not working right now.
 - [x] [update-docs-on-docs-commits.yml](.github/workflows/update-docs-on-docs-commits.yml) - Just added content read permissions since the workflow uses GH_TOKEN and removed checkout persist credentials.
 - [x] [update-maintainers-trigger.yaml](.github/workflows/update-maintainers-trigger.yaml) Didn't do too much, just added content read permissions since the workflow uses GH_TOKEN.
-- [x] [update-pr.yml](.github/workflows/update-pr.yml) - [Test PR](https://github.com/asyncapi-actions-test/asyncapi-github/pull/5)
-- [ ] [validate-workflow-schema.yml](.github/workflows/validate-workflow-schema.yml)
 - [x] [welcome-first-time-contrib.yml](.github/workflows/welcome-first-time-contrib.yml) - permissions tightened and GH_TOKEN -> GITHUB_TOKEN so that pull_request_target is no longer required. [Test Issue](https://github.com/asyncapi-actions-test/asyncapi-github/issues/2)
+- [x] [update-pr.yml](.github/workflows/update-pr.yml) - [Test PR](https://github.com/asyncapi-actions-test/asyncapi-github/pull/5)
+- [ ] [automerge.yml](.github/workflows/automerge.yml)
+- [ ] [autoupdate.yml](.github/workflows/autoupdate.yml)
+- [ ] [automerge-for-humans-merging.yml](.github/workflows/automerge-for-humans-merging.yml)
+- [ ] [validate-workflow-schema.yml](.github/workflows/validate-workflow-schema.yml)
 
 ### Scripts
 
-- [ ] [Mailchimp scripts](.github/workflows/scripts/mailchimp/)
+- [x] [Mailchimp scripts](.github/workflows/scripts/mailchimp/) - Used AI for this as don't have much expertise in XSS security.
   - htmlContent.js
   - index.js
   - package.json
@@ -42,10 +42,10 @@
 
 ### Actions
 
-- [ ] [get-node-version-from-package-lock](.github/actions/get-node-version-from-package-lock/)
+- [x] [get-node-version-from-package-lock](.github/actions/get-node-version-from-package-lock/)
   - action.yml
   - README.md
-- [ ] [slackify-markdown](.github/actions/slackify-markdown/)
+- [x] [slackify-markdown](.github/actions/slackify-markdown/) - Nothing to tighten here as the action only takes an input and returns an output, no API calls or anything.
   - action.yml
 
 
