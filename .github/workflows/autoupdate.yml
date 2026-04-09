@@ -18,14 +18,16 @@ on:
       - 'bot/**'
       - 'all-contributors/**'
 
+permissions: {}
+
 jobs:
   autoupdate-for-bot:
-    if: startsWith(github.repository, 'asyncapi/')
+    # if: startsWith(github.repository, 'asyncapi/') # TODO: uncomment
     name: Autoupdate autoapproved PR created in the upstream
     runs-on: ubuntu-latest
     steps:
       - name: Autoupdating
-        uses: docker://chinthakagodawita/autoupdate-action:v1
+        uses: chinthakagodawita/autoupdate@0707656cd062a3b0cf8fa9b2cda1d1404d74437e
         env:
           GITHUB_TOKEN: '${{ secrets.GH_TOKEN_BOT_EVE }}'
           PR_FILTER: "labelled"
