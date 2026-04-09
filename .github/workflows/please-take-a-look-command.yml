@@ -24,6 +24,7 @@ jobs:
         contains(github.event.comment.body, '/ptal') ||
         contains(github.event.comment.body, '/PTAL') 
       )
+    name: Ping code owners for attention
     runs-on: ubuntu-latest
     steps:
       - name: Check for Please Take a Look Command

@@ -9,14 +9,15 @@ on:
     types: 
       - published
 
-permissions:
-  contents: write
-  pull-requests: write
+permissions: {}
 
 jobs:
   version_bump:
     name: Generate assets and bump NodeJS
     runs-on: ubuntu-latest
+    permissions:
+      contents: write                 # required to create PR with bumped version in package.json   
+      pull-requests: write            # required to create PR with bumped version in package.json
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4

@@ -1,4 +1,14 @@
 ## Github Workflow Security Tightening Progress
+
+### Validate workflow files
+
+The flow would be -> 
+1. yamlint to validate the syntax of the yaml files.
+2. Check against schema using ajv to make sure the workflow files are following the correct structure and not missing any required fields.
+3. Use action-lint to check for any potential security issues or best practices in the workflow files.
+4. Use zizmor to check for any potential security issues in the workflow files.
+5. How to check parameters passed to the actions?
+
 ### Github workflows
 
 - [x] [zizmor.yml](zizmor.yml)
@@ -30,7 +40,6 @@
 - [x] [automerge.yml](.github/workflows/automerge.yml)
 - [x] [autoupdate.yml](.github/workflows/autoupdate.yml) [Test Workflow Run](https://github.com/asyncapi-actions-test/asyncapi-github/actions/runs/24183911502/job/70583650990)
 - [x] [automerge-for-humans-merging.yml](.github/workflows/automerge-for-humans-merging.yml) [Test PR](https://github.com/asyncapi-actions-test/asyncapi-github/pull/14) and [Test Workflow Run](https://github.com/asyncapi-actions-test/asyncapi-github/actions/runs/24184421062/job/70585393955).
-- [ ] [validate-workflow-schema.yml](.github/workflows/validate-workflow-schema.yml)
 
 ### Scripts
 
@@ -53,5 +62,5 @@
 
 ## Still need to verify
 
-- [ ] [issues-prs-notifications.yml](.github/workflows/issues-prs-notifications.yml)
-- [ ] [global-remover.yml](.github/workflows/global-remover.yml)
+- [issues-prs-notifications.yml](.github/workflows/issues-prs-notifications.yml) - Spam notifications need to be discussed.
+- [global-remover.yml](.github/workflows/global-remover.yml) - Removed this file as not needed anymore
