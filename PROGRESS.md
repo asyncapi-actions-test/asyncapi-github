@@ -25,11 +25,11 @@
 - [x] [transfer-issue.yml](.github/workflows/transfer-issue.yml) Removed that as it was not working right now.
 - [x] [update-docs-on-docs-commits.yml](.github/workflows/update-docs-on-docs-commits.yml) - Just added content read permissions since the workflow uses GH_TOKEN and removed checkout persist credentials.
 - [x] [update-maintainers-trigger.yaml](.github/workflows/update-maintainers-trigger.yaml) Didn't do too much, just added content read permissions since the workflow uses GH_TOKEN.
-- [x] [update-pr.yml](.github/workflows/update-pr.yml) - [Test PR](https://github.com/asyncapi-actions-test/asyncapi-github/pull/5)
 - [x] [welcome-first-time-contrib.yml](.github/workflows/welcome-first-time-contrib.yml) - permissions tightened and GH_TOKEN -> GITHUB_TOKEN so that pull_request_target is no longer required. [Test Issue](https://github.com/asyncapi-actions-test/asyncapi-github/issues/2)
-- [ ] [automerge.yml](.github/workflows/automerge.yml)
-- [ ] [autoupdate.yml](.github/workflows/autoupdate.yml)
-- [ ] [automerge-for-humans-merging.yml](.github/workflows/automerge-for-humans-merging.yml)
+- [x] [update-pr.yml](.github/workflows/update-pr.yml) - [Test PR](https://github.com/asyncapi-actions-test/asyncapi-github/pull/5)
+- [x] [automerge.yml](.github/workflows/automerge.yml)
+- [x] [autoupdate.yml](.github/workflows/autoupdate.yml) [Test Workflow Run](https://github.com/asyncapi-actions-test/asyncapi-github/actions/runs/24183911502/job/70583650990)
+- [x] [automerge-for-humans-merging.yml](.github/workflows/automerge-for-humans-merging.yml) [Test PR](https://github.com/asyncapi-actions-test/asyncapi-github/pull/14) and [Test Workflow Run](https://github.com/asyncapi-actions-test/asyncapi-github/actions/runs/24184421062/job/70585393955).
 - [ ] [validate-workflow-schema.yml](.github/workflows/validate-workflow-schema.yml)
 
 ### Scripts
