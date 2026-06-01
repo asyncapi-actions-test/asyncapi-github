@@ -14,7 +14,7 @@ on:
       - edited
       - ready_for_review
       - reopened
-      - unlocked                              # zizmor: ignore[dangerous-triggers] needed if we want author to be our bot
+      - unlocked                            
 
 permissions: {}
 
