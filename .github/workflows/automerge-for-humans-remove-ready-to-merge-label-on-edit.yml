@@ -13,6 +13,8 @@ on:
 
 permissions: {}
 
+# Only for testing
+
 jobs:
   remove-ready-label:
     name: Remove ready-to-merge label
