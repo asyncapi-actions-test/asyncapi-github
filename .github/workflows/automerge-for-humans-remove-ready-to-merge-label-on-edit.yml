@@ -9,7 +9,7 @@ on:
   pull_request_target:
     types:
       - synchronize
-      - edited
+      - edited                                # zizmor: ignore[dangerous-triggers] needed as pull_request token is read-only
 
 permissions: {}
 
